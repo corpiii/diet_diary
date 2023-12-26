@@ -1,3 +1,4 @@
+import 'package:diet_diary/add_screen/diet_add_screen.dart';
 import 'package:flutter/material.dart';
 
 class DietListScreen extends StatelessWidget {
@@ -10,7 +11,13 @@ class DietListScreen extends StatelessWidget {
           centerTitle: true,
           title: const Text('식단 리스트'),
           actions: [
-            iconButtonWidget(onPressed: () {}),
+            iconButtonWidget(onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DietAddScreen(),
+                fullscreenDialog: true),
+              );
+            }),
             const SizedBox(width: 10,)
           ],
         ),
