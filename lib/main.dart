@@ -1,7 +1,5 @@
+import 'package:diet_diary/diet_list_screen/diet_list_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'diet_list_screen/diet_list_screen.dart';
-import 'routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: routes,
+    return MaterialApp(
+      home: DietListScreen(),
       title: 'Diet Diary',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),

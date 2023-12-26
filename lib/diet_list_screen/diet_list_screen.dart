@@ -43,7 +43,9 @@ class _DietListScreenState extends State<DietListScreen> {
 
               // save();
 
-              _models.add(result);
+              setState(() {
+                _models.add(result);
+              });
             }),
             const SizedBox(
               width: 10,

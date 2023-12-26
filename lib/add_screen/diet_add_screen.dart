@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../model/diet.dart';
 
 class DietAddScreen extends StatefulWidget {
   const DietAddScreen({super.key});
@@ -12,8 +15,10 @@ class DietAddScreen extends StatefulWidget {
 
 class _DietAddScreenState extends State<DietAddScreen> {
   ImagePicker imagePicker = ImagePicker();
-  bool isExistImage = false;
   XFile? _selectedImage;
+
+  TextEditingController _titleTextEditingController = TextEditingController();
+  TextEditingController _bodyTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +30,16 @@ class _DietAddScreenState extends State<DietAddScreen> {
           title: const Text('추가'),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
+              onPressed: () async {
+                final title = _titleTextEditingController.text;
+                final body = _bodyTextEditingController.text;
+
+                if (_selectedImage != null) {
+                  final imageBase64 = base64Encode(await _selectedImage!.readAsBytes());
+
+                  final result = Diet(title: title, imageBase64: imageBase64, body: body);
+                  Navigator.of(context).pop(result);
+                }
               },
               child: const Text(
                 '완료',
@@ -60,6 +73,7 @@ class _DietAddScreenState extends State<DietAddScreen> {
 
   Widget titleTextFieldWidget() {
     return TextField(
+      controller: _titleTextEditingController,
       autofocus: true,
       decoration: InputDecoration(
         labelText: 'title',
@@ -105,6 +119,7 @@ class _DietAddScreenState extends State<DietAddScreen> {
 
   Widget bodyTextFieldWidget() {
     return TextField(
+      controller: _bodyTextEditingController,
       maxLength: 100,
       maxLines: 4,
       minLines: 4,
