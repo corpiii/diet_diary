@@ -1,10 +1,10 @@
 import 'package:diet_diary/add_screen/diet_add_screen.dart';
+import 'package:diet_diary/detail_screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../model/diet.dart';
 
 class DietListScreen extends StatefulWidget {
-
   DietListScreen({super.key});
 
   @override
@@ -12,6 +12,8 @@ class DietListScreen extends StatefulWidget {
 }
 
 class _DietListScreenState extends State<DietListScreen> {
+  ScrollController _controller = ScrollController();
+
   List<Diet> _models = [
     Diet(title: '12 24 12시', imageBase64: 'dummy', body: 'ㄹㄷ'),
     Diet(title: '12 24 08시', imageBase64: 'dummy', body: 'ㄹㄷ'),
@@ -55,14 +57,31 @@ class _DietListScreenState extends State<DietListScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListView.builder(
+              controller: _controller,
               itemCount: _models.length,
               itemBuilder: (BuildContext context, int idx) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    title: Text('${_models[idx].title}'),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            model: _models[idx],
+                          ),
+                        ),
+                      );
+                    },
+                    title: Center(
+                      child: Text(
+                        '${_models[idx].title}',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
                     contentPadding: EdgeInsets.all(8.0),
-                    tileColor: Colors.deepPurple,
+                    tileColor: Colors.blue[100],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0)),
                   ),
