@@ -40,11 +40,14 @@ class _DietAddScreenState extends State<DietAddScreen> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               titleTextFieldWidget(),
-              imagePickerWidget(),
-              // bodyTextFieldWidget(),
+              SizedBox(
+                width: 300,
+                height: 300,
+                child: imagePickerWidget(),
+              ),
+              Expanded(child: bodyTextFieldWidget()),
             ],
           ),
         ));
@@ -54,8 +57,9 @@ class _DietAddScreenState extends State<DietAddScreen> {
     return TextField(
       autofocus: true,
       decoration: InputDecoration(
+        labelText: 'title',
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: Colors.blue, width: 1.0)),
         enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue, width: 1.0)),
@@ -92,5 +96,23 @@ class _DietAddScreenState extends State<DietAddScreen> {
     _selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {});
+  }
+
+  Widget bodyTextFieldWidget() {
+    return TextField(
+      maxLength: 100,
+      maxLines: 4,
+      minLines: 4,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Colors.blue, width: 1.0)),
+        enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 1.0)),
+      ),
+      style: TextStyle(
+        fontSize: 20,
+      ),
+    );
   }
 }
