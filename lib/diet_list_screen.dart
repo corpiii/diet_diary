@@ -20,26 +20,37 @@ class DietListScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.deepPurple,
-                  width: 200,
-                  height: 70,
+                child: ListTile(
+                  title: Text('12/24 12시'),
+                  contentPadding: EdgeInsets.all(8.0),
+                  tileColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)
+                  ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.deepPurple,
-                  width: 200,
-                  height: 70,
+                child: ListTile(
+                  title: Text('12/24 08시'),
+                  contentPadding: EdgeInsets.all(8.0),
+                  tileColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)
+                  ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.deepPurple,
-                  width: 200,
-                  height: 70,
+                child: ListTile(
+                  title: Text('1234'),
+                  contentPadding: EdgeInsets.all(8.0),
+                  tileColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)
+                  ),
                 ),
               ),
             ],
