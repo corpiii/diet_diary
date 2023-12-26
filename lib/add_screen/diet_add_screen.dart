@@ -30,11 +30,41 @@ class _DietAddScreenState extends State<DietAddScreen> {
           )
         ],
       ),
-      body: Container(
-        color: Colors.deepPurple,
-        width: 100,
-        height: 100,
-      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            titleTextFieldWidget(),
+            // imagePickerWidget(),
+            // bodyTextFieldWidget(),
+          ],
+        ),
+      )
+    );
+  }
+
+  Widget titleTextFieldWidget() {
+    return Expanded(
+      child: TextField(
+        autofocus: true,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              color: Colors.blue,
+              width: 1.0
+            )
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.blue,
+              width: 1.0
+            )
+          ),
+          hintText: '00/00 00시',
+        ),
+      )
     );
   }
 }
