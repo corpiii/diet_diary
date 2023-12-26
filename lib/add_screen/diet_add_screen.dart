@@ -12,10 +12,23 @@ class _DietAddScreenState extends State<DietAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CloseButton(
+        leading: const CloseButton(
           color: Colors.blue,
         ),
-        title: Text('fe'),
+        title: const Text('추가'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              '완료',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )
+        ],
       ),
       body: Container(
         color: Colors.deepPurple,
