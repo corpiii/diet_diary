@@ -24,7 +24,7 @@ class _DietAddScreenState extends State<DietAddScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: const CloseButton(
+          leading: CloseButton(
             color: Colors.blue,
           ),
           title: const Text('추가'),
@@ -56,18 +56,23 @@ class _DietAddScreenState extends State<DietAddScreen> {
             )
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              titleTextFieldWidget(),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: imagePickerWidget(),
-                margin: EdgeInsets.all(12.0),
-              ),
-              bodyTextFieldWidget(),
-            ],
+        body: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              children: [
+                titleTextFieldWidget(),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: imagePickerWidget(),
+                  margin: EdgeInsets.all(12.0),
+                ),
+                bodyTextFieldWidget(),
+              ],
+            ),
           ),
         ));
   }
