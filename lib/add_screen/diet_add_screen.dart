@@ -25,7 +25,9 @@ class _DietAddScreenState extends State<DietAddScreen> {
           title: const Text('추가'),
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               child: const Text(
                 '완료',
                 style: TextStyle(
@@ -42,10 +44,13 @@ class _DietAddScreenState extends State<DietAddScreen> {
           child: Column(
             children: [
               titleTextFieldWidget(),
-              SizedBox(
-                width: 300,
-                height: 300,
-                child: imagePickerWidget(),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: imagePickerWidget(),
+                ),
               ),
               Expanded(child: bodyTextFieldWidget()),
             ],
