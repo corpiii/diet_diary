@@ -34,10 +34,14 @@ class _DietAddScreenState extends State<DietAddScreen> {
                 final title = _titleTextEditingController.text;
                 final body = _bodyTextEditingController.text;
 
-                if (_selectedImage != null) {
-                  final imageBase64 = base64Encode(await _selectedImage!.readAsBytes());
+                if (_selectedImage != null &&
+                    title.isNotEmpty &&
+                    body.isNotEmpty) {
+                  final imageBase64 =
+                      base64Encode(await _selectedImage!.readAsBytes());
 
-                  final result = Diet(title: title, imageBase64: imageBase64, body: body);
+                  final result =
+                      Diet(title: title, imageBase64: imageBase64, body: body);
                   Navigator.of(context).pop(result);
                 }
               },
@@ -54,18 +58,15 @@ class _DietAddScreenState extends State<DietAddScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: ListView(
             children: [
               titleTextFieldWidget(),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SizedBox(
-                  width: 300,
-                  height: 300,
-                  child: imagePickerWidget(),
-                ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: imagePickerWidget(),
+                margin: EdgeInsets.all(12.0),
               ),
-              Expanded(child: bodyTextFieldWidget()),
+              bodyTextFieldWidget(),
             ],
           ),
         ));
@@ -76,13 +77,12 @@ class _DietAddScreenState extends State<DietAddScreen> {
       controller: _titleTextEditingController,
       autofocus: true,
       decoration: InputDecoration(
-        labelText: 'title',
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: Colors.blue, width: 1.0)),
         enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue, width: 1.0)),
-        hintText: '00/00 00시',
+        hintText: '날짜, 식사시간',
       ),
     );
   }
@@ -94,11 +94,8 @@ class _DietAddScreenState extends State<DietAddScreen> {
       },
       child: _selectedImage == null
           ? Container(
-              width: 250,
-              height: 250,
-              color: Colors.grey,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
+              child: Container(
                 child: Image.asset(
                   'assets/image_add_icon.png',
                 ),
@@ -106,7 +103,6 @@ class _DietAddScreenState extends State<DietAddScreen> {
             )
           : Image.file(
               File(_selectedImage!.path),
-              width: 250,
             ),
     );
   }
