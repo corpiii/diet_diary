@@ -33,7 +33,7 @@ class _DietListScreenState extends State<DietListScreen> {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('식단 리스트'),
+          title: const Text('식단 기록'),
           actions: [
             iconButtonWidget(onPressed: () async {
               Diet result = await Navigator.push(

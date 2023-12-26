@@ -24,7 +24,7 @@ class _DietAddScreenState extends State<DetailScreen> {
           leading: const BackButton(
             color: Colors.blue,
           ),
-          title: const Text('상세'),
+          title: Text('${widget._model.title}'),
           actions: [
             TextButton(
               onPressed: () async {
@@ -43,16 +43,17 @@ class _DietAddScreenState extends State<DetailScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: ListView(
             children: [
-              Center(child: titleTextWidget(widget._model.title)),
               Container(
                 height: MediaQuery.of(context).size.height * 0.3,
                 child: imageWidget(widget._model.imageBase64),
                 margin: EdgeInsets.all(12.0),
               ),
-              bodyTextWidget(widget._model.body),
+              Container(
+                child: bodyTextWidget(widget._model.body),
+                margin: EdgeInsets.symmetric(horizontal: 20),
+              ),
             ],
           ),
         ));
