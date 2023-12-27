@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:realm/realm.dart';
 
 import '../model/diet.dart';
 
@@ -40,8 +41,7 @@ class _DietAddScreenState extends State<DietAddScreen> {
                   final imageBase64 =
                       base64Encode(await _selectedImage!.readAsBytes());
 
-                  final result =
-                      Diet(title: title, imageBase64: imageBase64, body: body);
+                  final result = Diet(Uuid.v1(), title, imageBase64, body);
                   Navigator.of(context).pop(result);
                 }
               },

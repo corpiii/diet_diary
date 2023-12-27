@@ -1,11 +1,13 @@
-class Diet {
-  final String title;
-  final String imageBase64;
-  final String body;
+import 'package:realm/realm.dart';
 
-  const Diet({
-    required this.title,
-    required this.imageBase64,
-    required this.body,
-  });
+part 'diet.g.dart';
+
+@RealmModel()
+class _Diet {
+  @PrimaryKey()
+  late final Uuid uuid;
+
+  late final String title;
+  late final String imageBase64;
+  late final String body;
 }

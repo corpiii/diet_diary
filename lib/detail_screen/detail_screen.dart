@@ -71,13 +71,12 @@ class _DietAddScreenState extends State<DetailScreen> {
   }
 
   Widget imageWidget(String base64Image) {
-    // var uInt8Image = base64Decode(base64Image);
+    var uInt8Image = base64Decode(base64Image);
 
-    return Image.asset('assets/image_add_icon.png');
-    // return Image.memory(
-    //   uInt8Image,
-    //   height: MediaQuery.of(context).size.height * 0.3,
-    // );
+    return Image.memory(
+      uInt8Image,
+      height: MediaQuery.of(context).size.height * 0.3,
+    );
   }
 
   Widget bodyTextWidget(String bodyText) {

@@ -1,6 +1,8 @@
 import 'package:diet_diary/add_screen/diet_add_screen.dart';
 import 'package:diet_diary/detail_screen/detail_screen.dart';
+import 'package:diet_diary/repository/realm_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:realm/realm.dart';
 
 import '../model/diet.dart';
 
@@ -13,19 +15,15 @@ class DietListScreen extends StatefulWidget {
 
 class _DietListScreenState extends State<DietListScreen> {
   ScrollController _controller = ScrollController();
+  RealmRepository repository = RealmRepository.instance;
 
-  List<Diet> _models = [
-    Diet(title: '12 24 12시', imageBase64: 'dummy', body: 'ㄹㄷ'),
-    Diet(title: '12 24 08시', imageBase64: 'dummy', body: 'ㄹㄷ'),
-    Diet(title: '12 23 20시', imageBase64: 'dummy', body: 'ㄹㄷ'),
-    Diet(title: '12 23 12시', imageBase64: 'dummy', body: 'ㄹㄷ'),
-  ];
+  List<Diet> _models = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _models = load();
+    _models = repository.model;
   }
 
   @override
@@ -43,10 +41,10 @@ class _DietListScreenState extends State<DietListScreen> {
                     fullscreenDialog: true),
               );
 
-              // save();
-
               setState(() {
                 _models.add(result);
+                repository.save(_models);
+                print('???');
               });
             }),
             const SizedBox(

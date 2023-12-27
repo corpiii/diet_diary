@@ -1,5 +1,8 @@
 import 'package:diet_diary/diet_list_screen/diet_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:realm/realm.dart';
+
+import 'model/diet.dart';
 
 void main() {
   runApp(const MyApp());
