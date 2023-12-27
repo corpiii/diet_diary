@@ -25,4 +25,12 @@ class RealmRepository {
       _realm.addAll(models, update: true);
     });
   }
+
+  Future<void> delete(Diet model) async {
+    _models = _models.where((element) => element.uuid != model.uuid).toList();
+
+    _realm.write(() {
+      _realm.delete(model);
+    });
+  }
 }

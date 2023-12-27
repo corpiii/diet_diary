@@ -2,7 +2,7 @@ import 'package:diet_diary/add_screen/diet_add_screen.dart';
 import 'package:diet_diary/detail_screen/detail_screen.dart';
 import 'package:diet_diary/repository/realm_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:realm/realm.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../model/diet.dart';
 
@@ -44,7 +44,6 @@ class _DietListScreenState extends State<DietListScreen> {
               setState(() {
                 _models.add(result);
                 repository.save(_models);
-                print('???');
               });
             }),
             const SizedBox(
@@ -58,30 +57,34 @@ class _DietListScreenState extends State<DietListScreen> {
               controller: _controller,
               itemCount: _models.length,
               itemBuilder: (BuildContext context, int idx) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(
-                            model: _models[idx],
+                return Slidable(
+                  endActionPane: endTrailingAction(idx),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DetailScreen(
+                                  model: _models[idx],
+                                ),
+                          ),
+                        );
+                      },
+                      title: Center(
+                        child: Text(
+                          '${_models[idx].title}',
+                          style: const TextStyle(
+                            fontSize: 20,
                           ),
                         ),
-                      );
-                    },
-                    title: Center(
-                      child: Text(
-                        '${_models[idx].title}',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
                       ),
+                      contentPadding: const EdgeInsets.all(8.0),
+                      tileColor: Colors.blue[100],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0)),
                     ),
-                    contentPadding: EdgeInsets.all(8.0),
-                    tileColor: Colors.blue[100],
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0)),
                   ),
                 );
               }),
@@ -96,6 +99,23 @@ class _DietListScreenState extends State<DietListScreen> {
         color: Colors.blue,
         size: 30,
       ),
+    );
+  }
+
+  ActionPane endTrailingAction(int index) {
+    return ActionPane(
+      motion: const DrawerMotion(),
+      children: [SlidableAction(onPressed: (BuildContext context) {
+        setState(() {
+          final willRemovedModel = _models[index];
+          _models.removeAt(index);
+          repository.delete(willRemovedModel);
+        });
+      },
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.red,
+        icon: Icons.delete,
+      )],
     );
   }
 }
