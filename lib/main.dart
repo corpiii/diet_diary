@@ -15,11 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DietListScreen(),
-      title: 'Diet Diary',
+      title: '식단기록장',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
